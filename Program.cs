@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 var tasks = new List<Task>();
 
-for (int i = 0; i < 1024; i++)
+for (int i = 0; i < 0x1000; i++)
 {
     tasks.Add(Task.Run(DoWork));
 }
@@ -21,12 +21,12 @@ static void DoWork()
 
         using (var cng = (RSACng)certificate.PrivateKey)
         {
-            var parameters = cng.ExportParameters(includePrivateParameters: true);
-
             var exportPolicy = cng.Key.GetProperty("Export Policy", CngPropertyOptions.None);
             var exportPolicyValue = (CngExportPolicies)BinaryPrimitives.ReadInt32LittleEndian(exportPolicy.GetValue());
 
             Console.WriteLine($"Export policy: {exportPolicyValue}");
+
+            var parameters = cng.ExportParameters(includePrivateParameters: true);
         }
     }
 }
