@@ -18,7 +18,7 @@ static void DoWork()
     {
         var data = certificate.GetRawCertData();
 
-        using (var cng = (RSACng)certificate.PrivateKey)
+        using (var cng = (RSACng)certificate.GetRSAPrivateKey())
         {
             var exportPolicy = cng.Key.GetProperty("Export Policy", CngPropertyOptions.None);
             var exportPolicyValue = (CngExportPolicies)BinaryPrimitives.ReadInt32LittleEndian(exportPolicy.GetValue());
