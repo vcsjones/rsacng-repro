@@ -1,0 +1,8 @@
+test-windows:
+  tags:
+    - brussels
+    - windows
+    - docker
+  image: mcr.microsoft.com/dotnet/sdk:6.0.100-windowsservercore-ltsc2019
+  script:
+    - dotnet run -c Release
