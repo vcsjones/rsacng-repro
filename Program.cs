@@ -1,5 +1,4 @@
 ﻿
-using Org.BouncyCastle.Security;
 using System.Buffers.Binary;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -17,7 +16,7 @@ static void DoWork()
 {
     using (var certificate = new X509Certificate2("certificate.pfx", "quamotion", X509KeyStorageFlags.Exportable))
     {
-        var bouncyCert = DotNetUtilities.FromX509Certificate(certificate);
+        var data = certificate.GetRawCertData();
 
         using (var cng = (RSACng)certificate.PrivateKey)
         {
