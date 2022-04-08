@@ -25,6 +25,11 @@ static void DoWork()
 
             Console.WriteLine($"Export policy: {exportPolicyValue}");
 
+            if(!exportPolicyValue.HasFlag(CngExportPolicies.AllowPlaintextExport))
+            {
+                Console.WriteLine("Error: Export policy is missing AllowPlaintextExport");
+            }
+
             var parameters = cng.ExportParameters(includePrivateParameters: true);
         }
     }
