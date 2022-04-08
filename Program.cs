@@ -12,6 +12,8 @@ for (int i = 0; i < 1024; i++)
 
         using (var cng = (RSACng)certificate.PrivateKey)
         {
+            var parameters = cng.ExportParameters(includePrivateParameters: true);
+
             var exportPolicy = cng.Key.GetProperty("Export Policy", CngPropertyOptions.None);
             var exportPolicyValue = (CngExportPolicies)BinaryPrimitives.ReadInt32LittleEndian(exportPolicy.GetValue());
 
