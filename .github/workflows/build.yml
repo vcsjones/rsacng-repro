@@ -1,0 +1,10 @@
+name: Build
+on: [push]
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+    - uses: actions/checkout@v2
+
+    - run: dotnet run -c Release
+      name: Run test
